@@ -6,13 +6,15 @@ import os
 class  Excel_Data_Get:
 
     def __init__(self):
-        self. file_name = os.path.join(settings.data_path,'test_data.xlsx')
+        self.file_name = os.path.join(settings.data_path,'test_data.xlsx')
         self.excel = xlrd.open_workbook(self.file_name)
         self.sheet =self.excel.sheet_by_name('Sheet1')
 
     def zuoye_one(self):
         "根据在github上的实例excel文件，利用xlrd模块读取第2列的所有数据"
         print(self.sheet.col_values(colx=1))
+        print(self.sheet.row_values(0))
+        print(self.sheet.row(0))
 
     # def zuoye_two(self,x,y):
     #    "根据在github上的实例excel文件，编写一个方法，方法参数为单元格的坐标（x,y），如果给的坐标是合并的单元格，输出此单元格是合并的，否则，输出普通单元格"
@@ -52,6 +54,12 @@ class  Excel_Data_Get:
     #                return  print('合并')
     #     return   print('普通')
     #
+    def default_excel(self):
+        dict = {'name':'xiaomao','age':10}
+        list = {1,2,3,4,4}
+
+        dict.setdefault(list['测试用例编号'], []).append(list)
+        return list
 
 
     def zuoye_three(self):
@@ -69,3 +77,4 @@ date = Excel_Data_Get()
 date.zuoye_one()
 date.zuoye_two(3,3)
 date.zuoye_three()
+date.default_excel()

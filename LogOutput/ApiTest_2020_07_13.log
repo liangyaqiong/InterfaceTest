@@ -1,0 +1,43 @@
+2020-07-13 14:17:07,850 APITestLog INFO {"tag":{"id":107,"name":"wrpgoAHihU6xOn1V"}}
+2020-07-13 14:17:55,043 APITestLog INFO 编辑标签失败：不存在的id{"tag":{"id":108,"name":"mzEqKgl46cZxJ8WA"}}
+2020-07-13 14:18:27,967 APITestLog INFO 编辑标签失败：不存在的id  接口响应报文：{"tag":{"id":109,"name":"f4xoW3tyaHCYnmFT"}}
+2020-07-13 14:19:17,638 APITestLog INFO 编辑标签失败：不存在的id  接口响应报文：{"tag":{"id":110,"name":"tn3YU8gaDRCFilQ1"}}
+2020-07-13 14:19:37,546 APITestLog INFO 编辑标签失败：不存在的id  接口响应报文：{"tag":{"id":111,"name":"E2ZYwWNOFk7XdAso"}}
+2020-07-13 14:22:06,814 APITestLog INFO 编辑标签失败：不存在的id  接口响应报文：{"errcode":45157,"errmsg":"invalid tag name hint: [KGgdU14ce-fuZeFa]"}
+2020-07-13 14:22:29,536 APITestLog INFO 编辑标签失败：不存在的id  接口响应报文：{"errcode":45157,"errmsg":"invalid tag name hint: [KGgdzMNre-Jy7fPA]"}
+2020-07-13 14:22:46,640 APITestLog INFO 编辑标签失败：不存在的id  接口响应报文：{"errcode":45157,"errmsg":"invalid tag name hint: [KGgdQh4FE-]"}
+2020-07-13 14:24:33,886 APITestLog INFO 删除标签成功  接口响应报文：{"errcode":45157,"errmsg":"invalid tag name hint: [LGgdmzNre-XFpRvA]"}
+2020-07-13 14:25:14,287 APITestLog INFO 删除标签成功  接口响应报文：{"errcode":45157,"errmsg":"invalid tag name hint: [mGgdtdmnRa-JufaoA]"}
+2020-07-13 14:27:27,759 APITestLog INFO {"errcode":0,"errmsg":"ok"}
+2020-07-13 14:27:35,650 APITestLog INFO 编辑标签失败：不存在的id  接口响应报文：{"errcode":45157,"errmsg":"invalid tag name hint: [nGgdfL0gE-RlZwoA]"}
+2020-07-13 14:27:54,164 APITestLog INFO 编辑标签失败：不存在的id  接口响应报文：{"errcode":45157,"errmsg":"invalid tag name hint: [nGgdU14ce-UA3f2a]"}
+2020-07-13 14:27:58,134 APITestLog INFO 编辑标签失败：不存在的id  接口响应报文：{"errcode":45157,"errmsg":"invalid tag name hint: [nGgdmzNre-VFKVNA]"}
+2020-07-13 14:28:18,450 APITestLog INFO 删除标签成功  接口响应报文：{"errcode":0,"errmsg":"ok"}
+2020-07-13 14:28:22,071 APITestLog INFO 删除标签成功  接口响应报文：{"errcode":0,"errmsg":"ok"}
+2020-07-13 14:29:54,264 APITestLog INFO 删除标签成功  接口响应报文：{"errcode":45058,"errmsg":"can't modify sys tag hint: [oGgdcONre-sBsADa]"}
+2020-07-13 14:40:38,158 APITestLog INFO [设置备注名成功]用例  接口响应报文：{"errcode":40003,"errmsg":"invalid openid hint: [TGgdlz4ce-HA4oSA]"}
+2020-07-13 14:42:27,995 APITestLog INFO [设置备注名成功]用例  接口响应报文：{"errcode":40003,"errmsg":"invalid openid hint: [UGgdejuFE-qnQt2a]"}
+2020-07-13 14:45:52,707 APITestLog INFO [设置备注名失败：不正确的appid]用例  接口响应报文：{"errcode":40003,"errmsg":"invalid openid hint: [wGgdmlnre-EPqpVa]"}
+2020-07-13 14:47:04,031 APITestLog INFO [设置备注名失败：不正确的openid]用例  接口响应报文：{"errcode":40003,"errmsg":"invalid openid hint: [xGgduraLRa-a4anuA]"}
+2020-07-13 14:48:24,189 APITestLog INFO [删除标签失败，不能修改0/1/2这三个系统默认保留的标签]用例  接口响应报文：{"errcode":45058,"errmsg":"can't modify sys tag hint: [XGgdhRNre-30tq6a]"}
+2020-07-13 14:48:24,310 APITestLog INFO [删除标签成功]用例  接口响应报文：{"errcode":0,"errmsg":"ok"}
+2020-07-13 14:48:24,469 APITestLog INFO [编辑标签失败：不存在的id]用例  接口响应报文：{"errcode":45157,"errmsg":"invalid tag name hint: [XGgdFAMre-Tbs9BA]"}
+2020-07-13 14:48:24,564 APITestLog INFO {"errcode":0,"errmsg":"ok"}
+2020-07-13 14:50:25,018 APITestLog INFO [删除标签失败，不能修改0/1/2这三个系统默认保留的标签]用例  接口响应报文：{"errcode":45058,"errmsg":"can't modify sys tag hint: [YGgdU14ce-qF1Xua]"}
+2020-07-13 14:50:25,131 APITestLog INFO [删除标签成功]用例  接口响应报文：{"errcode":0,"errmsg":"ok"}
+2020-07-13 14:50:25,281 APITestLog INFO [编辑标签失败：不存在的id]用例  接口响应报文：{"errcode":45157,"errmsg":"invalid tag name hint: [YGgdUcQNe-AZ8vMA]"}
+2020-07-13 14:50:25,404 APITestLog INFO {"errcode":0,"errmsg":"ok"}
+2020-07-13 14:51:47,137 APITestLog INFO [删除标签失败，不能修改0/1/2这三个系统默认保留的标签]用例  接口响应报文：{"errcode":45058,"errmsg":"can't modify sys tag hint: [zGgdNo4FE-d1XeLA]"}
+2020-07-13 14:51:47,228 APITestLog INFO [删除标签成功]用例  接口响应报文：{"errcode":0,"errmsg":"ok"}
+2020-07-13 14:51:47,289 APITestLog INFO {"access_token":"35_x4zOQG-N2GcwxNkukdb76Bu7W07CFNzmF05-uaZ-Ry9xhVbM4JSMS7I3OX_AZUwtfg6KWwEaRONLrYg1ZerFL--gUhR_K_7rrL43eFA8sAzJnRsv-80GIHcLdmfEXCjm6S93w2lXE7YSLyZpHMHgAFAOTO","expires_in":7199}
+2020-07-13 14:51:47,388 APITestLog INFO [编辑标签失败：不存在的id]用例  接口响应报文：{"errcode":45157,"errmsg":"invalid tag name hint: [zGgdfL0gE-sG6XwA]"}
+2020-07-13 14:51:47,491 APITestLog INFO {"errcode":0,"errmsg":"ok"}
+2020-07-13 14:53:26,086 APITestLog INFO {"access_token":"35__HFOioPi-khqdLVSZV-TM2VUhTInOWeu8Y_XjW3QXHLCSe3qcLp28QhmjmL5OM7EL7sx4RVj6sLu25K74bGqbrzfyZMNe0O2qJDIG9t6-eJ_IfbcjyiWXtU6kww1xxr1VZGatcJwbQvyqXcUQKBfAGACWN","expires_in":7200}
+2020-07-13 14:54:06,268 APITestLog INFO {"access_token":"35_hh8v5sbS2M-n4g5xgTg5SK9jax5TMYGtiTZAW-Nl2CCXCUl4u2HYaTjMTPTRlRdG8bdTOschE8TJMtD32030FkJtnEakHt1PIPJp9_J2dWcSpwhUimBhKYV_dObyF7BEoZReLRxtwKnue9GLIPScAGACJM","expires_in":7200}
+2020-07-13 14:54:21,853 APITestLog INFO {'Connection': 'keep-alive', 'Content-Type': 'application/json; encoding=utf-8', 'Date': 'Mon, 13 Jul 2020 06:54:21 GMT', 'Content-Length': '194'}
+2020-07-13 14:55:58,606 APITestLog INFO {'Connection': 'keep-alive', 'Content-Type': 'application/json; encoding=utf-8', 'Date': 'Mon, 13 Jul 2020 06:55:58 GMT', 'Content-Length': '194'}
+2020-07-13 14:56:15,568 APITestLog INFO [删除标签失败，不能修改0/1/2这三个系统默认保留的标签]用例  接口响应报文：{"errcode":45058,"errmsg":"can't modify sys tag hint: [3GgdQh4FE-u7yqIa]"}
+2020-07-13 14:56:15,685 APITestLog INFO [删除标签成功]用例  接口响应报文：{"errcode":0,"errmsg":"ok"}
+2020-07-13 14:56:15,770 APITestLog INFO {'Connection': 'keep-alive', 'Content-Type': 'application/json; encoding=utf-8', 'Date': 'Mon, 13 Jul 2020 06:56:15 GMT', 'Content-Length': '194'}
+2020-07-13 14:56:15,869 APITestLog INFO [编辑标签失败：不存在的id]用例  接口响应报文：{"errcode":45157,"errmsg":"invalid tag name hint: [3GgdtgsFE-LdmaKa]"}
+2020-07-13 14:56:16,011 APITestLog INFO {"errcode":0,"errmsg":"ok"}

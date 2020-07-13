@@ -18,7 +18,7 @@ def get_access_token_common():
     return TOKEN
 
 
-def get_access_token(grant_type,appid,secret):
+def get_access_token_api(grant_type,appid,secret):
     "获取TOKEN接口封装"
     params = {
         "grant_type": grant_type,
@@ -29,18 +29,8 @@ def get_access_token(grant_type,appid,secret):
                 params = params )
     return response
 
-def get_access_token(TOKEN,name):
-    "获取TOKEN接口封装"
-    params={"access_token":TOKEN}
-    data ={"tag": {"name": name }}
 
-    response =  session.post(url=LocalConfig.WEIXIN_HOST+'/cgi-bin/tags/create',
-                params = params,
-                data = data)
-    return response
-
-
-def get_access_token(TOKEN,tag_json):
+def create_tag_api(TOKEN,tag_json):
     "创建tag接口封装"
     params={"access_token":TOKEN}
     json_data =tag_json
@@ -51,7 +41,7 @@ def get_access_token(TOKEN,tag_json):
     return response
 
 
-def get_access_token(TOKEN,tag_json):
+def update_tag_api(TOKEN,tag_json):
     "编辑tag接口封装"
     params={"access_token":TOKEN}
     json_data =tag_json
@@ -61,7 +51,7 @@ def get_access_token(TOKEN,tag_json):
                 json=json_data )
     return response
 
-def get_access_token(TOKEN,tag_json):
+def delete_tag_api(TOKEN,tag_json):
     "删除tag接口封装"
     params={"access_token":TOKEN}
     json_data =tag_json
@@ -71,7 +61,7 @@ def get_access_token(TOKEN,tag_json):
                 json=json_data )
     return response
 
-def get_access_token(TOKEN,JSON_PARAMS):
+def setremark_api(TOKEN,JSON_PARAMS):
     "设置用户备注名接口封装"
     params={"access_token":TOKEN}
     json_data =JSON_PARAMS
