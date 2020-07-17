@@ -14,6 +14,8 @@ def  test_one():
     param = 'requestId=53ad59aa-d3a6-4c60-a6fb-44e709631980'
     response =  requests.get(url=url_ptc+'withdraw/bankcard/query',params=param)
     response.encoding='UTF-8'
+    response.content
+    response.text
     print('\n接口请求响应为：\n',response.json())
     re = response.json()
     try:

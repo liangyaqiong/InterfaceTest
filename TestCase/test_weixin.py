@@ -21,8 +21,10 @@ class Test_Cases_Weixin(unittest.TestCase):
                                               appid=LocalConfig.APPID,
                                               secret=LocalConfig.SERCET
                                              )
+
+
         logger.info(reponse.headers)
-        self.assertIn('"access_token"',reponse.text)
+        self.assertIn('"access_token"', reponse.text)
 
     def test_get_token_error(self):
         "appid错误，获取token失败"
@@ -32,13 +34,6 @@ class Test_Cases_Weixin(unittest.TestCase):
                                                   )
         self.assertEqual(reponse.json()['errcode'],40013)
     #
-    def test_create_tag_success(self):
-        "创建标签成功测试"
-        json_data = {   "tag" : {     "name" : "ayjhsjhsjqsj326"   } }
-        reponse = common_api.create_tag_api(TOKEN = common_api.get_access_token_common(),
-                                            tag_json=json_data)
-        print(reponse.text)
-        self.assertIn('id',reponse.text)
 
     def test_create_tag_success(self):
         "创建标签成功测试"
@@ -46,6 +41,7 @@ class Test_Cases_Weixin(unittest.TestCase):
         reponse = common_api.create_tag_api(TOKEN = common_api.get_access_token_common(),
                                             tag_json=json_data)
         print(reponse.text)
+        print(reponse.url)
         # self.assertEqual(reponse.json()['errmsg'], 'invalid appid')
         self.assertIn('"id"',reponse.text)
 
@@ -55,6 +51,7 @@ class Test_Cases_Weixin(unittest.TestCase):
         reponse = common_api.create_tag_api(TOKEN = common_api.get_access_token_common(),
                                             tag_json=json_data)
         print(reponse.text)
+
         self.assertEqual(reponse.json()['errcode'], 45157)
 
     def test_update_tag_succcess(self):
@@ -75,7 +72,7 @@ class Test_Cases_Weixin(unittest.TestCase):
 
     def test_delete_tag_success(self):
         "删除标签成功"
-        json_data = {   "tag":{        "id" : 106   } }
+        json_data = {   "tag":{        "id" : 125   } }
         reponse = common_api.delete_tag_api(TOKEN=common_api.get_access_token_common(),
                                             tag_json=json_data)
         logger.info('[删除标签成功]用例  接口响应报文：' + reponse.text)
@@ -102,10 +99,7 @@ class Test_Cases_Weixin(unittest.TestCase):
 
     def setremark_api_error_openid(self):
         "设置备注名失败：不正确的openid"
-        json_data = {
-            "openid": "ocYxcuBt0mRugKZ7tGAHPnUaOW7Y",
-            "remark": "pangzi"
-        }
+        json_data = {"openid": "ocYxcuBt0mRugKZ7tGAHPnUaOW7Y","remark": "pangzi"}
         reponse = common_api.setremark_api(TOKEN=common_api.get_access_token_common(),
                                            JSON_PARAMS=json_data)
         logger.info('[设置备注名失败：不正确的openid]用例  接口响应报文：' + reponse.text)
@@ -114,6 +108,6 @@ class Test_Cases_Weixin(unittest.TestCase):
 
 if __name__ == '__main__':
     testsuite = unittest.TestSuite()
-    testsuite.addTest(Test_Cases_Weixin('test_get_token_success'))
+    testsuite.addTest(Test_Cases_Weixin('test_create_tag_success'))
     runner = unittest.TextTestRunner()
     runner.run(testsuite)
