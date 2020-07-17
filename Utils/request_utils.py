@@ -15,7 +15,7 @@ class RequestUtils:
        self.temp_variables = {}
 
    def get(self,params_info):
-
+        #该方法实现get请求封装，并将需要传递给后面接口的字段及值以字段的形式存储起来temp_variables
         response = self.session.get(url=self.host_url + params_info['请求地址'],
                          params = ast.literal_eval(params_info['请求参数(get)'])
                          )
@@ -38,7 +38,7 @@ class RequestUtils:
         return get_result
 
    def post(self,params_info):
-
+        #该方法实现post请求封装，并将需要传递给后面接口的字段及值以字段的形式存储起来temp_variables
         response = self.session.post(url=self.host_url+params_info['请求地址'],
                                      params = ast.literal_eval(params_info['请求参数(get)']) ,
                                      json = ast.literal_eval( params_info['提交数据(post)'])
@@ -64,7 +64,8 @@ class RequestUtils:
 
 
    def request(self,params_step):
-
+        #'该方法实现：1.获取excel读取的参数中需要类似${token}这种格式的需要依赖前一个接口的字段，并替换成temp_variables临时储存
+        #字段中的值 2.把请求根据请求类型分发给不同的方法并返回请求结果
         request_type = params_step['请求方式']
         variable_list = re.findall('\\${\w+}',params_step['请求参数(get)'])
         if  variable_list:
@@ -89,6 +90,7 @@ class RequestUtils:
         return  result
 
    def steps_case(self,cases_info):
+       #该方法实现将具有多个步骤的测试用例一一分发给包装好的request()方法，为该类的调用入口
        for case_step in cases_info:
            case_step_result = self.request(case_step)
            if case_step_result['code'] != 0:
@@ -102,7 +104,6 @@ if __name__ =='__main__':
     case = RequestUtils()
 
     case_info =     [ {'请求方式': 'get', '请求地址': '/cgi-bin/token','请求参数(get)': '{"grant_type":"client_credential","appid":"wx55614004f367f8ca","secret":"65515b46dd758dfdb09420bb7db2c67f"}','提交数据（post）': '', '取值方式': 'json取值', '传值变量': 'token', '取值代码': '$.access_token'},
-                      {'请求方式': 'post', '请求地址': '/cgi-bin/tags/update', '请求参数(get)': '{"access_token":${token}}','提交数据(post)': '{"tag":{"id":111,"name":"Ykfn8C47qWd12FKt1"}}', '取值方式': '无', '传值变量': '', '取值代码': ''},
                       {'请求方式': 'post', '请求地址': '/cgi-bin/tags/create', '请求参数(get)': '{"access_token":${token}}','提交数据(post)': '{"tag" : {"name" : "uwuwbdhdbbwbdhwbdh"} }', '取值方式': '无', '传值变量': '', '取值代码': ''}]
 
     case.steps_case(case_info)
