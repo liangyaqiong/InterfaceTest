@@ -1,5 +1,6 @@
 import random
 import string
+import jsonpath
 from faker import Faker
 
 '生成含字母和数字的随机数'
@@ -15,3 +16,10 @@ print(faker.credit_card_number()) #信用卡号
 
 dict = {'age':19}
 print(dict['age'])
+
+
+json = {"tag":{"id":559,"name":"happyhapappyend02"}}
+jsonpath.jsonpath(json,'$.tag[0].id')
+
+value = jsonpath.jsonpath(json,"$.tag.id")[0]
+print(value)

@@ -4,6 +4,7 @@ import re
 import jsonpath
 
 from Utils.local_config_utils import LocalConfig
+from Utils import check_utils
 import requests
 
 
@@ -14,12 +15,13 @@ class RequestUtils:
        self.session = requests.session()
        self.temp_variables = {}
 
-   def get(self,params_info):
+   def __get(self,params_info):
         #该方法实现get请求封装，并将需要传递给后面接口的字段及值以字段的形式存储起来temp_variables
         response = self.session.get(url=self.host_url + params_info['请求地址'],
                          params = ast.literal_eval(params_info['请求参数(get)'])
                          )
         response.encoding = response.apparent_encoding
+        print(response.text)
         if params_info['取值方式'] == 'json取值':
             value = jsonpath.jsonpath(response.json(),params_info['取值代码'])[0]
             self.temp_variables[params_info['传值变量']] = value
@@ -27,17 +29,10 @@ class RequestUtils:
             value = re.findall(params_info['取值代码'],response.text)[0]
             self.temp_variables[params_info['传值变量']] = value
 
-        get_result = {
-            'code':0,
-            'response_reason':response.reason,
-            'response_code':response.status_code,
-            'response_headers':response.headers,
-            'response_body':response.text
-        }
-        print(response.url)
+        get_result = check_utils.CheckUtils(response).run_check(check_type=params_info['期望结果类型'],check_data=params_info['期望结果'])
         return get_result
 
-   def post(self,params_info):
+   def __post(self,params_info):
         #该方法实现post请求封装，并将需要传递给后面接口的字段及值以字段的形式存储起来temp_variables
         response = self.session.post(url=self.host_url+params_info['请求地址'],
                                      params = ast.literal_eval(params_info['请求参数(get)']) ,
@@ -45,21 +40,18 @@ class RequestUtils:
                                      )
         print(params_info['提交数据(post)'])
         response.encoding = response.apparent_encoding
+        print(response.text)
+
         if params_info['取值方式'] == 'json取值':
-            value = jsonpath.jsonpath(response.json(), params_info['取值代码'])[0]
+            print(params_info['取值代码'])
+            value = jsonpath.jsonpath(response.json(),params_info['取值代码'])
             self.temp_variables[params_info['传值变量']] = value
         elif params_info['取值方式'] == '正则取值':
             value = re.findall(params_info['取值代码'], response.text)[0]
             self.temp_variables[params_info['传值变量']] = value
 
-        post_result = {
-            'code': 0,
-            'response_reason': response.reason,
-            'response_code': response.status_code,
-            'response_headers': response.headers,
-            'response_body': response.text
-        }
-        print(response.url)
+        post_result = check_utils.CheckUtils(response).run_check(check_type=params_info['期望结果类型'],check_data=params_info['期望结果'])
+        print('self.temp_variables',self.temp_variables)
         return post_result
 
 
@@ -74,14 +66,15 @@ class RequestUtils:
                 .replace(variable,'"%s"' % self.temp_variables[variable[2:-1]])
                 print(params_step['请求参数(get)'])
         if request_type == 'get':
-            result = self.get(params_step)
+            result = self.__get(params_step)
         elif request_type == 'post':
+            print(params_step['提交数据(post)'])
             variable_list_post = re.findall('\\${\w+}', params_step['提交数据(post)'])
-            if variable_list:
+            if variable_list_post:
                for variable_post in variable_list_post:
                    params_step['提交数据(post)'] = params_step['提交数据(post)']\
                    .replace( variable_post,'"%s"' % self.temp_variables[variable[2:-1]])
-            result = self.post(params_step)
+            result = self.__post(params_step)
 
         else:
 
@@ -95,7 +88,7 @@ class RequestUtils:
            case_step_result = self.request(case_step)
            if case_step_result['code'] != 0:
               break
-           print(case_step_result)
+       print(case_step_result)
        return case_step_result
 
 
@@ -103,7 +96,15 @@ if __name__ =='__main__':
 
     case = RequestUtils()
 
-    case_info =     [ {'请求方式': 'get', '请求地址': '/cgi-bin/token','请求参数(get)': '{"grant_type":"client_credential","appid":"wx55614004f367f8ca","secret":"65515b46dd758dfdb09420bb7db2c67f"}','提交数据（post）': '', '取值方式': 'json取值', '传值变量': 'token', '取值代码': '$.access_token'},
-                      {'请求方式': 'post', '请求地址': '/cgi-bin/tags/create', '请求参数(get)': '{"access_token":${token}}','提交数据(post)': '{"tag" : {"name" : "uwuwbdhdbbwbdhwbdh"} }', '取值方式': '无', '传值变量': '', '取值代码': ''}]
+    # case_info = [{'测试用例编号': 'case02', '测试用例名称': '测试能否正确新增用户标签', '用例执行': '否', '测试用例步骤': 'step_01', '接口名称': '获取access_token接口', '请求方式': 'get', '请求地址': '/cgi-bin/token', '请求参数(get)': '{"grant_type":"client_credential","appid":"wx55614004f367f8ca","secret":"65515b46dd758dfdb09420bb7db2c67f"}', '提交数据(post)': '', '取值方式': '正则取值', '传值变量': 'token', '取值代码': '"access_token":"(.+?)"', '期望结果类型': '正则匹配', '期望结果': '{"access_token":"(.+?)","expires_in":(.+?)}'}]
+    case_info = [{'测试用例编号': 'case01', '测试用例名称': '测试能否正确新增用户标签', '用例执行': '否', '测试用例步骤': 'step_01', '接口名称': '获取access_token接口', '请求方式': 'get', '请求地址': '/cgi-bin/token', '请求参数(get)': '{"grant_type":"client_credential","appid":"wx55614004f367f8ca","secret":"65515b46dd758dfdb09420bb7db2c67f"}', '提交数据(post)': '', '取值方式': '正则取值', '传值变量': 'token', '取值代码': '"access_token":"(.+?)"', '期望结果类型': '正则匹配', '期望结果': '{"access_token":"(.+?)","expires_in":(.+?)}'},
+                 {'测试用例编号': 'case02', '测试用例名称': '测试查询所有标签', '用例执行': '是', '测试用例步骤': 'step_02', '接口名称': '获取所有标签接口', '请求方式': 'get', '请求地址': '/cgi-bin/tags/get', '请求参数(get)': '{"access_token":${token}}', '提交数据(post)': '', '取值方式': '', '传值变量': '', '取值代码': '', '期望结果类型': 'json键是否存在', '期望结果': 'tags'},
+                 {'测试用例编号': 'case01', '测试用例名称': '测试能否正确新增用户标签', '用例执行': '否', '测试用例步骤': 'step_01','接口名称': '获取access_token接口', '请求方式': 'get', '请求地址': '/cgi-bin/token','请求参数(get)': '{"grant_type":"client_credential","appid":"wx55614004f367f8ca","secret":"65515b46dd758dfdb09420bb7db2c67f"}','提交数据(post)': '', '取值方式': '正则取值', '传值变量': 'token', '取值代码': '"access_token":"(.+?)"', '期望结果类型': '正则匹配','期望结果': '{"access_token":"(.+?)","expires_in":(.+?)}'},
+                 {'测试用例编号': 'case03', '测试用例名称': '创建标签', '用例执行': '是', '测试用例步骤': 'step_03', '接口名称': '新建标签', '请求方式': 'post', '请求地址': '/cgi-bin/tags/create', '请求参数(get)': '{"access_token":${token}}', '提交数据(post)': '{"tag": {"name":"happy31"}}', '取值方式': 'json取值', '传值变量': 'tagid', '取值代码': "$.tag.id", '期望结果类型': '正则匹配', '期望结果': '{"tag":{"id":(.+?),"name":"happy31"}}'},
+                 {'测试用例编号': 'case01', '测试用例名称': '测试能否正确新增用户标签', '用例执行': '否', '测试用例步骤': 'step_01', '接口名称': '获取access_token接口', '请求方式': 'get', '请求地址': '/cgi-bin/token', '请求参数(get)': '{"grant_type":"client_credential","appid":"wx55614004f367f8ca","secret":"65515b46dd758dfdb09420bb7db2c67f"}', '提交数据(post)': '', '取值方式': '正则取值', '传值变量': 'token', '取值代码': '"access_token":"(.+?)"', '期望结果类型': '正则匹配', '期望结果': '{"access_token":"(.+?)","expires_in":(.+?)}'},
+                 {'测试用例编号': 'case04', '测试用例名称': '创建标签', '用例执行': '是', '测试用例步骤': 'step_04', '接口名称': '更新标签', '请求方式': 'post', '请求地址': '/cgi-bin/tags/update', '请求参数(get)': '{"access_token":${token}}', '提交数据(post)': '{"tag":{"id":${tagid},"name":"sad31"}} ', '取值方式': '', '传值变量': '', '取值代码': '', '期望结果类型': 'json键值对', '期望结果': '{"errcode":0,"errmsg":"ok"}' },
+                 {'测试用例编号': 'case01', '测试用例名称': '测试能否正确新增用户标签', '用例执行': '否', '测试用例步骤': 'step_01', '接口名称': '获取access_token接口', '请求方式': 'get', '请求地址': '/cgi-bin/token', '请求参数(get)': '{"grant_type":"client_credential","appid":"wx55614004f367f8ca","secret":"65515b46dd758dfdb09420bb7db2c67f"}', '提交数据(post)': '', '取值方式': '正则取值', '传值变量': 'token', '取值代码': '"access_token":"(.+?)"', '期望结果类型': '正则匹配', '期望结果': '{"access_token":"(.+?)","expires_in":(.+?)}'},
+                 {'测试用例编号': 'case04', '测试用例名称': '创建标签', '用例执行': '是', '测试用例步骤': 'step_04', '接口名称': '更新标签', '请求方式': 'post', '请求地址': '/cgi-bin/tags/update', '请求参数(get)': '{"access_token":${token}}', '提交数据(post)': '{"tag":{"id":${tagid}}} ', '取值方式': '', '传值变量': '', '取值代码': '', '期望结果类型': 'json键值对', '期望结果': '{"errcode":0,"errmsg":"ok"}'},
+                 ]
 
     case.steps_case(case_info)
