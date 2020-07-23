@@ -8,6 +8,7 @@ class CheckUtils:
     def __init__(self,response_data=None):
 
         self.response_data =response_data
+        #特殊语法
         self.check_rules = {
                '无':self.none_check,
                'json键是否存在':self.keys_check,
@@ -36,10 +37,11 @@ class CheckUtils:
             'check_result': False,
             'message': ''  # 扩招作为日志输出等
         }
-
+    #"检查方式：'无"
     def none_check(self,check_data=None):
          return  self.pass_result
 
+    #"检查方式：'检查键是否存在"
     def keys_check(self,check_data=None):
         keys_list = check_data.split(',')
         check_result_list = []
@@ -54,7 +56,7 @@ class CheckUtils:
             return self.fail_result
         else:
             return self.pass_result
-
+    # 检查键值对是否存在
     def key_value_check(self,check_data=None):
         check_result_list = []
         fail_keys_values_list = []
@@ -68,14 +70,14 @@ class CheckUtils:
             return  self.fail_result
         else:
             return  self.pass_result
-
+     #正则表达式检查能否匹配到特定字符
     def regexp_check(self,check_data=None):
         pattern = re.compile(check_data)#将正则匹配字符串编译为正则表达式对象
         if re.findall(pattern=pattern,string= self.response_data.text):
             return self.pass_result
         else:
             return self.fail_result
-
+    #根据传入进来的检查类型，进行分发调用
     def run_check(self,check_type=None,check_data=None):
         request_code = self.response_data.status_code
         if request_code == 200:
