@@ -67,8 +67,6 @@ class Excel_Utils:
 
 if __name__ == '__main__':
 
-    excel =Excel_Utils(os.path.join(settings.data_path, 'test_data.xlsx'),'Sheet1')
-    print(os.path.join(settings.data_path, 'test_data.xlsx'))
-    print(excel.get_dict_data())
+    excel =Excel_Utils(os.path.join(settings.data_path, 'test_case.xlsx'),'Sheet1')
     for ele in excel.get_dict_data():
         print(ele)

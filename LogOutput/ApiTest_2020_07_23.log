@@ -1,0 +1,5 @@
+2020-07-23 10:42:45,162 APITestLog INFO [删除标签失败，不能修改0/1/2这三个系统默认保留的标签]用例  接口响应报文：{"errcode":45058,"errmsg":"can't modify sys tag hint: [UEldzMNre-xQsxua]"}
+2020-07-23 10:42:45,318 APITestLog INFO [删除标签成功]用例  接口响应报文：{"errcode":0,"errmsg":"ok"}
+2020-07-23 10:42:45,408 APITestLog INFO {'Connection': 'keep-alive', 'Content-Type': 'application/json; encoding=utf-8', 'Date': 'Thu, 23 Jul 2020 02:42:45 GMT', 'Content-Length': '194'}
+2020-07-23 10:42:45,551 APITestLog INFO [编辑标签失败：不存在的id]用例  接口响应报文：{"errcode":45157,"errmsg":"invalid tag name hint: [UEldNo4FE-3qm5SA]"}
+2020-07-23 10:42:45,676 APITestLog INFO {"errcode":0,"errmsg":"ok"}

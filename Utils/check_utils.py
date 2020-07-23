@@ -21,6 +21,7 @@ class CheckUtils:
             'response_code': self.response_data.status_code,
             'response_headers': self.response_data.headers,
             'response_body': self.response_data.text,
+            'response_url': self.response_data.url,
             'check_result': True,
             'message': ''  # 扩招作为日志输出等
         }
@@ -31,6 +32,7 @@ class CheckUtils:
             'response_code': self.response_data.status_code,
             'response_headers': self.response_data.headers,
             'response_body': self.response_data.text,
+            'response_url': self.response_data.url,
             'check_result': False,
             'message': ''  # 扩招作为日志输出等
         }

@@ -30,8 +30,4 @@ class Test_Data:
 
 if __name__ == '__main__':
 
-    test_data = Test_Data(os.path.join(settings.data_path, 'test_case.xlsx'),'Sheet1')
-    print(test_data.dict_add_case_number())
-    print(test_data.test_data_list())
-    for i in test_data.test_data_list():
-        print(i)
+     pass

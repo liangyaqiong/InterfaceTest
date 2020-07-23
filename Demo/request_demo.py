@@ -48,7 +48,6 @@ class RequestsUtils():
                                      json=ast.literal_eval(post_info["提交数据（post）"])
                                     )
         response.encoding = response.apparent_encoding
-        print(response.url)
         if post_info["取值方式"] == "json取值":
             value = jsonpath.jsonpath( response.json(),post_info["取值代码"] )[0]
             self.temp_variables[ post_info["传值变量"] ] = value
