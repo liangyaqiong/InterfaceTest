@@ -22,7 +22,7 @@ class Test_Data:
         data_list = []
         for a, b in self.dict_add_case_number().items():
              dict_test_data = {}
-             dict_test_data['case_name'] = a
+             dict_test_data['case_id'] = a
              dict_test_data['case_info'] = b
              data_list.append(dict_test_data)
         return  data_list

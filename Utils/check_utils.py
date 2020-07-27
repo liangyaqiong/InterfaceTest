@@ -35,7 +35,7 @@ class CheckUtils:
             'response_body': self.response_data.text,
             'response_url': self.response_data.url,
             'check_result': False,
-            'message': ''  # 扩招作为日志输出等
+            'message':''  # 扩招作为日志输出等
         }
     #"检查方式：'无"
     def none_check(self,check_data=None):

@@ -96,10 +96,13 @@ class RequestUtils:
    def steps_case(self,cases_info):
        #该方法实现将具有多个步骤的测试用例一一分发给包装好的request()方法，为该类的调用入口
        for case_step in cases_info:
+           print('CASE_STEP: ',case_step['测试用例编号'],case_step['测试用例名称'],)
            case_step_result = self.request(case_step)
            if case_step_result['code'] != 0:
+               logger.error('存在接口请求异常')
                break
-           print(case_step_result)
+           else:
+               logger.info(case_step_result)
        return case_step_result
 
 
